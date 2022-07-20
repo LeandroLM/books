@@ -15,7 +15,7 @@ defmodule PlateSlate.Mixfile do
       version: "0.0.1",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers,
+      compilers: [:phoenix] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
       deps: deps()
@@ -42,19 +42,22 @@ defmodule PlateSlate.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.0"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
+      {:phoenix, "~> 1.6.11"},
+      {:phoenix_pubsub, "~> 2.1.1"},
+      {:phoenix_ecto, "~> 4.4.0"},
       {:decimal, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.10"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"},
-      {:absinthe, "~> 1.4.2"},
-      {:absinthe_plug, "~> 1.4.0"},
-      {:absinthe_phoenix, "~> 1.4.0"},
-      {:absinthe_relay, "~> 1.4.0"},
+      {:phoenix_html, "~> 3.2.0"},
+      {:phoenix_live_reload, "~> 1.3.3", only: :dev},
+      {:gettext, "~> 0.20.0"},
+      {:cowboy, "~> 2.9.0"},
+      {:absinthe, "~> 1.7.0"},
+      {:absinthe_plug, "~> 1.5.8"},
+      {:absinthe_phoenix, "~> 2.0.2"},
+      {:absinthe_relay, "~> 1.5.2"},
+      {:jason, "~> 1.3.0"},
+      {:ecto_sql, "~> 3.8.3"},
+      {:plug_cowboy, "~> 2.5"},
     ]
   end
 
@@ -68,7 +71,7 @@ defmodule PlateSlate.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end

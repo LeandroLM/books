@@ -6,7 +6,7 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/wwgraphql for more book information.
 #---
-use Mix.Config
+import Config
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
