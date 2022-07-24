@@ -14,7 +14,7 @@ defmodule PlateSlateWeb.Schema do
   query do
     @desc "The list of available items on the menu"
     field :menu_items, list_of(:menu_item) do
-      arg :filter, :menu_item_filter
+      arg :filter, non_null(:menu_item_filter)
       arg :order, type: :sort_order, default_value: :asc
       resolve &Resolvers.Menu.menu_items/3
     end
@@ -31,7 +31,7 @@ defmodule PlateSlateWeb.Schema do
     field :name, :string
 
     @desc "Matching a category name"
-    field :category, :string
+    field :category, non_null(:string)
 
     @desc "Matching a tag"
     field :tag, :string
