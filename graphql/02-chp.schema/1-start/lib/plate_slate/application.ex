@@ -12,8 +12,6 @@ defmodule PlateSlate.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
-    import Supervisor.Spec
-
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
@@ -22,7 +20,8 @@ defmodule PlateSlate.Application do
       PlateSlateWeb.Endpoint,
       # Start your own worker by calling: PlateSlate.Worker.start_link(arg1, arg2, arg3)
       # worker(PlateSlate.Worker, [arg1, arg2, arg3]),
-      {Phoenix.PubSub, [name: PlateSlate.PubSub, adapter: Phoenix.PubSub.PG2]}
+      {Phoenix.PubSub, [name: PlateSlate.PubSub, adapter: Phoenix.PubSub.PG2]},
+      {Absinthe.Subscription, PlateSlateWeb.Endpoint}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
