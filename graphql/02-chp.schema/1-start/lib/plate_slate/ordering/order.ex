@@ -5,7 +5,7 @@ defmodule PlateSlate.Ordering.Order do
   schema "orders" do
     field :customer_number, :integer, read_after_writes: true
     field :ordered_at, :utc_datetime, read_after_writes: true
-    field :state, :string
+    field :state, :string, read_after_writes: true
 
     embeds_many :items, PlateSlate.Ordering.Item
 
