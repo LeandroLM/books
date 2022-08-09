@@ -29,6 +29,16 @@ defmodule PlateSlateWeb.Schema do
   end
 
   mutation do
+    field :ready_order, :order_result do
+      arg :id, non_null(:id)
+      resolve &Resolvers.Ordering.ready_order/3
+    end
+
+    field :complete_order, :order_result do
+      arg :id, non_null(:id)
+      resolve &Resolvers.Ordering.complete_order/3
+    end
+
     field :place_order, :order_result do
       arg :input, non_null(:place_order_input)
       resolve &Resolvers.Ordering.place_order/3
@@ -41,6 +51,23 @@ defmodule PlateSlateWeb.Schema do
   end
 
   subscription do
+    field :update_order, :order do
+      arg :id, non_null(:id)
+
+      config fn args, _info ->
+        {:ok, topic: args.id}
+      end
+
+      trigger [:ready_order, :complete_order], topic: fn
+        %{order: order} -> [order.id]
+        _ -> []
+      end
+
+      resolve fn %{order: order}, _, _ ->
+        {:ok, order}
+      end
+    end
+
     field :new_order, :order do
       config fn _args, _info ->
         {:ok, topic: "*"}
