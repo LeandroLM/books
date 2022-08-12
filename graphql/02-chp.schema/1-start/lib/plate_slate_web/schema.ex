@@ -10,9 +10,18 @@ defmodule PlateSlateWeb.Schema do
   use Absinthe.Schema
 
   alias PlateSlateWeb.Resolvers
+  alias PlateSlateWeb.Schema.Middleware
 
   import_types __MODULE__.MenuTypes
   import_types __MODULE__.OrderingTypes
+
+  def middleware(middleware, _field, %{identifier: :mutation}) do
+    middleware ++ [Middleware.ChangesetErrors]
+  end
+
+  def middleware(middleware, _field, _object) do
+    middleware
+  end
 
   query do
     @desc "The list of available items on the menu"
