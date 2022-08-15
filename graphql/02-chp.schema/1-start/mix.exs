@@ -58,6 +58,8 @@ defmodule PlateSlate.Mixfile do
       {:jason, "~> 1.3.0"},
       {:ecto_sql, "~> 3.8.3"},
       {:plug_cowboy, "~> 2.5"},
+      {:comeonin_ecto_password, "~> 3.0.0"},
+      {:pbkdf2_elixir, "~> 1.0"}
     ]
   end
 
