@@ -45,6 +45,13 @@ defmodule PlateSlate.Menu do
   """
   def get_category!(id), do: Repo.get!(Category, id)
 
+  def categories_by_id(_, ids) do
+    Category
+    |> where([c], c.id in ^Enum.uniq(ids))
+    |> Repo.all()
+    |> Map.new(fn category -> {category.id, category} end)
+  end
+
   @doc """
   Creates a category.
 
